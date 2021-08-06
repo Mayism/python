@@ -108,6 +108,12 @@ class Spider():
                 pass
         return all_content
 
+    def getType(self):
+        worksheet = xlrd.open_workbook('D:\sheet.xls')
+        sheet_names = worksheet.sheet_names()
+        print(sheet_names)
+        sheet = worksheet.sheet_by_index(4)
+        return sheet
 
     def go(self):
         """
@@ -115,17 +121,32 @@ class Spider():
         """
         csdn = xlwt.Workbook(encoding='utf-8') #创建Excel
         sheet = csdn.add_sheet('csdn', cell_overwrite_ok = True) #创建sheet页面
+        typesheet = self.getType()
         url = self.__getUrl()
+        guideData = 0;
+        guide = 0
+        ques = 0
+        quesData = 0
         row = 0
         for i in url:
             try:
+                # cols = typesheet.cell_value(row, 4)
                 htmls = self.__fetch_content(i)
                 title = self.__getTitle(htmls)
                 num = self.__getReadNum(htmls)
+                # if int(cols) == 0:
+                #     guideData += int(str(num).split("'")[3])
+                #     guide += 1
+                #     print('技术指导类文章数目' + str(guide) + '技术指导类文章浏览:' + str(guideData))
+                # else:
+                #     quesData += int(str(num).split("'")[3])
+                #     ques += 1
+                #     print('解决方案类文章数目' + str(ques) + '解决方案类文章浏览:' + str(quesData))
                 print('博客:' + str(title).split("'")[3] + ' 阅读量：' + str(num).split("'")[3])
                 sheet.write(row, 0, str(title).split("'")[3])
                 sheet.write(row, 1, int(str(num).split("'")[3]))
-                csdn.save('D:\\pythonProject\\csdnData1.xls')
+                # sheet.write(row, 2, int(cols))
+                csdn.save('D:\\pythonProject\\csdnData.xls')
                 row += 1
             except ValueError as e:
                 print(e.__doc__+'the error url is' + str(i))
