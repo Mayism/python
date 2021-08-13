@@ -206,8 +206,8 @@ class Spider():
         plt.rc('font', family='Youyuan', size='11')  # 和matplotlib一样指明字体
         plt.rc('axes', unicode_minus='False')
 
-        kit = ('崩溃', '性能管理', 'AppLinking', '云存储', '认证', '快应用', '快游戏', '联运', "云函数", "开放式测试", "应用签名")
-        num = (spider.crash/spider.crashnum, spider.apm/spider.apmnum, spider.applinking/spider.applinkingnum, spider.cloudstorage/spider.cloudstoragenum, spider.auth/spider.authnum, spider.quickapp/spider.quickappnum, spider.quickgame/spider.quickgamenum, spider.appkit/spider.appkitnum, spider.cloudfunc/spider.cloudfuncnum, spider.opentest/spider.opentestnum, spider.sig/spider.signum)
+        kit = ('崩溃', '远程配置', '性能管理', 'AppLinking', '云存储', '云数据库', '认证', '快应用', '快游戏', '联运', "云函数", "开放式测试", "应用签名")
+        num = (spider.crash/spider.crashnum, spider.remote/spider.remotenum, spider.apm/spider.apmnum, spider.applinking/spider.applinkingnum, spider.cloudstorage/spider.cloudstoragenum, spider.clouddb/spider.clouddbnum, spider.auth/spider.authnum, spider.quickapp/spider.quickappnum, spider.quickgame/spider.quickgamenum, spider.appkit/spider.appkitnum, spider.cloudfunc/spider.cloudfuncnum, spider.opentest/spider.opentestnum, spider.sig/spider.signum)
         pdseries = pd.Series(num, index=kit)
         print(pdseries)
         plt.title('各个kit平均浏览量')  # 设置中文标题
